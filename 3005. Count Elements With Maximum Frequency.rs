@@ -1,10 +1,11 @@
 /*
- * Link: https://leetcode.com/problems/count-elements-with-maximum-frequency/
- * Problem: 3005. Count Elements With Maximum Frequency
- * */
+Link: https://leetcode.com/problems/count-elements-with-maximum-frequency/
+Problem: 3005. Count Elements With Maximum Frequency
+*/
 
 impl Solution {
     pub fn max_frequency_elements(nums: Vec<i32>) -> i32 {
+        use std::cmp::max;
         let mut max_frequency = 0;
         use std::collections::HashMap;
         let mut m: HashMap<i32, i32> = HashMap::new();
@@ -12,19 +13,17 @@ impl Solution {
 
         for i in nums {
             *m.entry(i).or_insert(0) += 1;
-
-            if max_frequency < m[&i] {
-                max_frequency = m[&i];
-            }
+            
+            max_frequency = max(max_frequency, m[&i]);
         }
 
-        for (n, f) in m {
+        for (_, f) in m {
             if f == max_frequency {
                 ans += f;
             }
         }
 
         return ans;
+        
     }
 }
-
